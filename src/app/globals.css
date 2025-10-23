@@ -1,22 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&family=Oswald:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @layer base {
-  html {
-    font-size: 18px;
+  /*
+    Fluid type scale (320px → 1920px, capped at 1920)
+    Max sizes reflect the 4K spec you provided and cap at 1920px.
+    Headings use Lexend Zetta with −18% tracking and 120% line-height.
+    Body text uses Oswald with 140% line-height.
+  */
+
+  :root {
+    /* Global line-height tokens */
+    --lh-heading: 120%;
+    --lh-body: 140%;
+    --lh-body-133: 133.3333%;
+    --lh-display: 104%;
+
+    /* Text scale (max at 1920px), min ~= 16/18 of max to match base = 16 */
+    --fs-text-sm: clamp(14.22px, calc(14.22px + (16px - 14.22px) * ((100vw - 320px) / 1600)), 16px);
+    --fs-text-base: clamp(16px, calc(16px + (18px - 16px) * ((100vw - 320px) / 1600)), 18px);
+    --fs-text-lg: clamp(21.33px, calc(21.33px + (24px - 21.33px) * ((100vw - 320px) / 1600)), 24px);
+    --fs-text-xl: clamp(23.11px, calc(23.11px + (26px - 23.11px) * ((100vw - 320px) / 1600)), 26px);
+    --fs-text-2xl: clamp(26.67px, calc(26.67px + (30px - 26.67px) * ((100vw - 320px) / 1600)), 30px);
+
+    /* Headings (1.333 ratio sequence), sizes at/above 1920px */
+    --fs-h1: clamp(105px, calc(105px + (118px - 105px) * ((100vw - 320px) / 1600)), 118px);
+    --fs-h2: clamp(79.11px, calc(79.11px + (89px - 79.11px) * ((100vw - 320px) / 1600)), 89px);
+    --fs-h3: clamp(59.11px, calc(59.11px + (67px - 59.11px) * ((100vw - 320px) / 1600)), 67px);
+    --fs-h4: clamp(44.44px, calc(44.44px + (50px - 44.44px) * ((100vw - 320px) / 1600)), 50px);
+    --fs-h5: clamp(33.78px, calc(33.78px + (38px - 33.78px) * ((100vw - 320px) / 1600)), 38px);
+    --fs-h6: clamp(24.89px, calc(24.89px + (28px - 24.89px) * ((100vw - 320px) / 1600)), 28px);
+
+    /* Display sizes */
+    --fs-display-xs: clamp(65.78px, calc(65.78px + (74px - 65.78px) * ((100vw - 320px) / 1600)), 74px);
+    --fs-display-sm: clamp(94.22px, calc(94.22px + (106px - 94.22px) * ((100vw - 320px) / 1600)), 106px);
+    --fs-display-lg: clamp(115.56px, calc(115.56px + (130px - 115.56px) * ((100vw - 320px) / 1600)), 130px);
   }
-  
+
+  html {
+    /* Keep rems predictable; body/text utilities will handle sizing */
+    font-size: 16px;
+  }
+
   body {
     font-family: 'Oswald', system-ui, sans-serif;
-    line-height: 1.6;
+    line-height: var(--lh-body);
     font-weight: 400;
   }
 
-  h1, h2, h3 {
-    font-family: 'Lexend Zetta', system-ui, sans-serif;
+  /* Heading defaults — custom system (no Tailwind text remap) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-lexend-zetta), system-ui, sans-serif;
+    letter-spacing: -0.18em;
+    line-height: var(--lh-heading);
+    font-weight: 800;
   }
-  
-  p, h4, h5, h6 {
-    font-family: 'Oswald', system-ui, sans-serif;
-  }
+
+  /* Default heading sizes; utilities can override when needed */
+  h1 { font-size: var(--fs-h1); }
+  h2 { font-size: var(--fs-h2); }
+  h3 { font-size: var(--fs-h3); }
+  h4 { font-size: var(--fs-h4); }
+  h5 { font-size: var(--fs-h5); }
+  h6 { font-size: var(--fs-h6); }
+}
+
+@layer utilities {
+  /* Custom text utilities (avoid Tailwind text-* to prevent conflicts) */
+  .tx-sm { font-size: var(--fs-text-sm); line-height: var(--lh-body); }
+  .tx-base { font-size: var(--fs-text-base); line-height: var(--lh-body); }
+  .tx-lg { font-size: var(--fs-text-lg); line-height: var(--lh-body); }
+  .tx-xl { font-size: var(--fs-text-xl); line-height: var(--lh-body); }
+  .tx-2xl { font-size: var(--fs-text-2xl); line-height: var(--lh-body); }
+  .tx-3xl { font-size: var(--fs-text-2xl); line-height: var(--lh-body-133); }
+
+  /* Semantic helpers to guarantee heading typography when not using h1–h6 */
+  .heading { font-family: var(--font-lexend-zetta), system-ui, sans-serif; letter-spacing: -0.18em; line-height: var(--lh-heading); font-weight: 800; }
+
+  /* Optional explicit display utilities */
+  .text-display-xs { font-size: var(--fs-display-xs, 74px); line-height: var(--lh-display); }
+  .text-display-sm { font-size: var(--fs-display-sm, 106px); line-height: var(--lh-display); }
+  .text-display-lg { font-size: var(--fs-display-lg, 130px); line-height: var(--lh-display); }
+
+  /* Aliases without the text- prefix to match design shorthand */
+  .display-xs { font-size: var(--fs-display-xs, 74px); line-height: var(--lh-display); }
+  .display-sm { font-size: var(--fs-display-sm, 106px); line-height: var(--lh-display); }
+  .display-lg { font-size: var(--fs-display-lg, 130px); line-height: var(--lh-display); }
 }
