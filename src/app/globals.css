@@ -65,24 +65,44 @@
 }
 
 @layer utilities {
+  /* Viewport height helper */
+  .h-100 { min-height: 100vh !important; }
+  /* Generic absolute background layer to stack below content */
+  .bg-layer { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  /* Z-index helpers for section layering */
+  .z-n99 { z-index: -99 !important; }
+  .z-n80 { z-index: -80 !important; }
+  .z-n70 { z-index: -70 !important; }
+  .z-n60 { z-index: -60 !important; }
+  .z-1 { z-index: 1 !important; }
+  .z-2 { z-index: 2 !important; }
+  .z-3 { z-index: 3 !important; }
+  .z-4 { z-index: 4 !important; }
+
+  /* Section backgrounds pulled from /public/assets */
+  .bg-hero { background-image: url('/assets/img-hero.png'); background-size: cover; background-repeat: no-repeat; background-position: center top; }
+  .bg-motivation { background-image: url('/assets/img-motivation.png'); background-size: cover; background-repeat: no-repeat; background-position: center; }
+  .bg-stats { background-color: #1D1C1E; background-size: cover; background-repeat: no-repeat; background-position: center; }
+  .bg-corefeatures { background-image: url('/assets/img-corefeature.png'); background-size: cover; background-repeat: no-repeat; background-position: center; }
+  .bg-community { background-image: url('/assets/img-community.png'); background-size: cover; background-repeat: no-repeat; background-position: center; }
   /* Custom text utilities (avoid Tailwind text-* to prevent conflicts) */
-  .tx-sm { font-size: var(--fs-text-sm); line-height: var(--lh-body); }
-  .tx-base { font-size: var(--fs-text-base); line-height: var(--lh-body); }
-  .tx-lg { font-size: var(--fs-text-lg); line-height: var(--lh-body); }
-  .tx-xl { font-size: var(--fs-text-xl); line-height: var(--lh-body); }
-  .tx-2xl { font-size: var(--fs-text-2xl); line-height: var(--lh-body); }
-  .tx-3xl { font-size: var(--fs-text-2xl); line-height: var(--lh-body-133); }
+  .tx-sm { font-size: var(--fs-text-sm) !important; line-height: var(--lh-body) !important; }
+  .tx-base { font-size: var(--fs-text-base) !important; line-height: var(--lh-body) !important; }
+  .tx-lg { font-size: var(--fs-text-lg) !important; line-height: var(--lh-body) !important; }
+  .tx-xl { font-size: var(--fs-text-xl) !important; line-height: var(--lh-body) !important; }
+  .tx-2xl { font-size: var(--fs-text-2xl) !important; line-height: var(--lh-body) !important; }
+  .tx-3xl { font-size: var(--fs-text-2xl) !important; line-height: var(--lh-body-133) !important; }
 
   /* Semantic helpers to guarantee heading typography when not using h1–h6 */
   .heading { font-family: var(--font-lexend-zetta), system-ui, sans-serif; letter-spacing: -0.18em; line-height: var(--lh-heading); font-weight: 800; }
 
   /* Optional explicit display utilities */
-  .text-display-xs { font-size: var(--fs-display-xs, 74px); line-height: var(--lh-display); }
-  .text-display-sm { font-size: var(--fs-display-sm, 106px); line-height: var(--lh-display); }
-  .text-display-lg { font-size: var(--fs-display-lg, 130px); line-height: var(--lh-display); }
+  .text-display-xs { font-size: var(--fs-display-xs, 74px) !important; line-height: var(--lh-display) !important; }
+  .text-display-sm { font-size: var(--fs-display-sm, 106px) !important; line-height: var(--lh-display) !important; }
+  .text-display-lg { font-size: var(--fs-display-lg, 130px) !important; line-height: var(--lh-display) !important; }
 
   /* Aliases without the text- prefix to match design shorthand */
-  .display-xs { font-size: var(--fs-display-xs, 74px); line-height: var(--lh-display); }
-  .display-sm { font-size: var(--fs-display-sm, 106px); line-height: var(--lh-display); }
-  .display-lg { font-size: var(--fs-display-lg, 130px); line-height: var(--lh-display); }
+  .display-xs { font-size: var(--fs-display-xs, 74px) !important; line-height: var(--lh-display) !important; }
+  .display-sm { font-size: var(--fs-display-sm, 106px) !important; line-height: var(--lh-display) !important; }
+  .display-lg { font-size: var(--fs-display-lg, 130px) !important; line-height: var(--lh-display) !important; }
 }
